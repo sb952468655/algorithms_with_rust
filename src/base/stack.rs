@@ -26,13 +26,26 @@ impl<T> Stack<T> {
     }
 
     pub fn is_empty(&self) -> bool {
-        match self.size {
-            0 => true,
-            _ => false,
-        }
+        self.size == 0
     }
 
     pub fn size(&self) -> usize {
         self.size
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_stack() {
+        let mut stack1 = Stack::new();
+        assert_eq!(true, stack1.is_empty());
+        stack1.push(1);
+        stack1.push(2);
+        stack1.push(3);
+        assert_eq!(3, stack1.size());
+        assert_eq!(3, stack1.pop());
+        println!("stack1 = {:?}",stack1);
     }
 }

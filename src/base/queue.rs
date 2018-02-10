@@ -23,13 +23,26 @@ impl<T> Queue<T> {
     }
 
     pub fn is_empty(&self) -> bool {
-        match self.size {
-            0 => true,
-            _ => false,
-        }
+        self.size == 0
     }
 
     pub fn size(&self) -> usize {
         self.size
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_queue() {
+        let mut queue1 = Queue::new();
+        assert_eq!(true, queue1.is_empty());
+        queue1.enqueue(3);
+        queue1.enqueue(4);
+        queue1.enqueue(5);
+        assert_eq!(3, queue1.size());
+        assert_eq!(3, queue1.dequeue());
+        println!("queue1 = {:?}",queue1);
     }
 }
