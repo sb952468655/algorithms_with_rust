@@ -34,17 +34,17 @@ impl<T> Stack<T>
         self.size += 1;
     }
 
-    pub fn pop(&mut self) -> T {
+    pub fn pop(&mut self) -> *mut Node<T> {
         if self.top == None {
             panic!("stack is empty");
         }
         else {
             unsafe {
-                let item = (*self.top.unwrap()).item.clone();
+                let old_top = self.top.unwrap();
                 self.top = (*self.top.unwrap()).next;
                 self.size -= 1;
-                println!("pop {:?}",item);
-                return item;
+                println!("pop {:?}",*old_top);
+                return old_top;
             }
         } 
     }
@@ -70,9 +70,12 @@ mod tests {
         stack1.push(&mut node1);
         stack1.push(&mut node2);
         stack1.push(&mut node3);
-        assert_eq!("ccc", stack1.pop());
-        assert_eq!("bbb", stack1.pop());
-        assert_eq!("aaa", stack1.pop());
+        unsafe {
+            assert_eq!("ccc", (*stack1.pop()).item);
+            assert_eq!("bbb", (*stack1.pop()).item);
+            assert_eq!("aaa", (*stack1.pop()).item);
+        }
+        
 
         assert_eq!(0, stack1.size());
         assert_eq!(true, stack1.is_empty());
