@@ -17,4 +17,5 @@ fn main() {
     stack1.push(1);
     let mut node1 = stack_list::Node { item: 8,next: None };
     stack_list1.push(&mut node1);
+    stack_list1.pop();
 }
