@@ -2,6 +2,7 @@ pub mod bag;
 pub mod queue;
 pub mod stack;
 pub mod stack_list;
+pub mod union_find;
 
 pub fn euclidean_algorithm(p: i32, q: i32) -> i32 {
     match q {
